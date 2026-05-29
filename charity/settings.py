@@ -49,7 +49,6 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "accounts.apps.AccountsConfig",
     "charities.apps.CharitiesConfig",
-    "about_us.apps.AboutUsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
