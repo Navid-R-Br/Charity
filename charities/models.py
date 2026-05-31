@@ -100,28 +100,6 @@ class Task(models.Model):
         ('age_limit_to__lte', 'age'),  # Exclude lower ages
     ]
 
-    @classmethod
-    def filter_related_tasks_to_charity_user(cls, user):
-        is_charity = user.is_charity
-        if not is_charity:
-            return []
-
-        return cls.objects.filter(charity=user.charity)
-
-    @classmethod
-    def filter_related_tasks_to_benefactor_user(cls, user):
-        is_benefactor = user.is_benefactor
-        if not is_benefactor:
-            return []
-
-        return cls.objects.filter(assigned_benefactor=user.benefactor)
-
-    @classmethod
-    def filter_related_tasks_to_user(cls, user):
-        charity_tasks = cls.filter_related_tasks_to_charity_user(user)
-        benefactor_tasks = cls.filter_related_tasks_to_benefactor_user(user)
-        return charity_tasks.union(benefactor_tasks)
-
     def assign_to_benefactor(self, benefactor):
         self.state = Task.TaskStatus.WAITING
         self.assigned_benefactor = benefactor
